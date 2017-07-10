@@ -1,0 +1,40 @@
+{
+  "name": "rhmap-keycloak",
+  "version": "1.0.0",
+  "description": "demo of rhmap keycloak integration",
+  "main": "application.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/torbjorndahlen/rhmap-keycloak.git"
+  },
+  "keywords": [
+    "rhmap",
+    "keycloak",
+    "sso"
+  ],
+  "author": "torbjorndahlen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/torbjorndahlen/rhmap-keycloak/issues"
+  },
+  "homepage": "https://github.com/torbjorndahlen/rhmap-keycloak#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-env": "^0.4.4",
+    "grunt-nodemon": "^0.4.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "fh-mbaas-api": "^7.0.11",
+    "karma": "^1.7.0",
+    "keycloak-connect": "^3.2.0"
+  }
+}
