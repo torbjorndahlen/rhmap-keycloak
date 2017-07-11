@@ -1,7 +1,7 @@
 # rhmap-keycloak
 ## Preparation
 ```
-1. Install RHSSO  [RHSSO](https://keycloak.gitbooks.io/documentation/content/server_installation/topics/installation.html)
+1. Install RHSSO  (https://keycloak.gitbooks.io/documentation/content/server_installation/topics/installation.html)
 2. Login as admin to RHSSO
 3. Create realm (e.g. rhmap-keycloak)
 4. Create client (e.g. rhmap-keycloak)
