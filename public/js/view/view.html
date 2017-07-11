@@ -1,0 +1,53 @@
+<div layout="column" layout-fill class="mdb-element-r">
+
+  <!-- top toolbar -->
+  <div ng-show="showToolbar" flex ui-view="toolbar" class="mdb-element-r">
+  </div>
+   <!-- top toolbar -->
+
+  <div flex layout-gt-md="row" layout-fill layout-margin layout-padding class="mdb-element-r">
+
+  <!-- sidenav -->
+    <div ng-show="showSidenav" flex flex-gt-md="20" layout-fill ui-view="sidenav" class="mdb-element-r">
+    </div>
+    <!-- sidenav-->
+
+    <!-- analytics  1-->
+    <div flex class="mdb-element-r" layout="column">
+        <!-- analytics  2 -->
+      <div ng-show="showAnalytics" flex ui-view="analytics" class="mdb-whiteframe-container mdb-element-r" layout="row" layout-margin layout-align="space-between center">
+      </div>
+       <!-- analytics  2-->
+
+    <!-- main content-->
+    <!-- list-->
+    <div ng-show="showList" flex ui-view="list" class="mdb-element-r">
+    </div>
+
+    <!-- card-->
+    <div ng-show="showCard" flex ui-view="card" layout="row" layout-align="center" layout-wrap class="mdb-element-r">
+    </div>
+
+    <!-- form-->
+    <div ng-show="showForm" flex ui-view="form" class="mdb-element-r">
+    </div>
+
+    <!-- push
+    <div ng-show="showPush" flex ui-view="push" class="mdb-element-r">
+    </div>
+  -->
+    <!-- sync
+    <div ng-show="showSync" flex ui-view="sync" class="mdb-element-r">
+    </div>
+-->
+    <!-- auth -->
+    <div ng-show="showAuth" flex ui-view="auth" class="mdb-element-r">
+    </div>
+
+    <!-- main content-->
+
+  </div>
+      <!-- analytics 1-->
+
+  </div>
+</div>

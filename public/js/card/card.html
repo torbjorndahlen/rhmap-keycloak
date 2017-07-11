@@ -1,0 +1,43 @@
+<md-card
+  class="mdb-card mdb-element-y"
+  flex="none"
+  ng-repeat="item in items"
+  >
+
+  <md-card-header>
+
+    <md-card-avatar>
+      <md-icon ng-click="doPrimaryAction($event, item)" class="md-avatar-icon mdb-element-y" md-svg-icon="img/ic_assignment_24px.svg"></md-icon>
+    </md-card-avatar>
+
+    <md-card-header-text class="mdb-element-y">
+      <span class="md-title mdb-element-y">{{item.name}}</span>
+      <span class="md-subhead mdb-element-y">{{item.what}}</span>
+    </md-card-header-text>
+  </md-card-header>
+
+  <md-card-title class="mdb-element-y">
+    <md-card-title-text class="mdb-element-y">
+      <span class="md-headline mdb-element-y">{{item.name}}</span>
+      <span class="md-subhead mdb-element-y">{{item.what}}</span>
+    </md-card-title-text>
+  </md-card-title>
+
+  <md-card-content class="mdb-element-y">
+    <p class="mdb-element-y">{{item.notes2}}</p>
+  </md-card-content>
+
+<div layout="row" layout-align="end center" class="mdb-element-y">
+  <md-divider></md-divider>
+
+  <md-card-avatar class="mdb-element-y">
+    <md-icon ng-click="doPrimaryAction($event, item)" class="md-avatar-icon mdb-element-y" md-svg-icon="img/ic_autorenew_24px.svg">
+      </md-icon>
+  </md-card-avatar>
+
+  <md-card-actions class="mdb-element-y">
+    <md-button class="mdb-element-y" ng-click="doPrimaryAction($event, item)">{{item.action1}}</md-button>
+    <md-button class="mdb-element-y" ng-click="doPrimaryAction($event, item)">{{item.action2}}</md-button>
+  </md-card-actions>
+</div>
+</md-card>

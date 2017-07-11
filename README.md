@@ -24,3 +24,36 @@
 4. Open a browser and navigate to `localhost:8000/api/protected`
 5. Authenticate to RHSSO with the user and password you registered in RHSSO
 ```
+
+## Adding Keycloak to the AngularJS app
+The AngularJS app can use Keycloak to authenticate the user before making REST calls to the
+Cloud App. Note that the app needs to be bootstrapped manually in order to prevent
+constant reloading due to the redirect sent back from Keycloak after authentication.
+
+```
+<script>
+angular.element(document).ready(() => {
+  window._keycloak = Keycloak();
+
+  window._keycloak
+    .init({
+      onLoad: 'login-required'
+    })
+    .success(() => {
+      angular.bootstrap(document, ['rhmap-keycloak']); // manually bootstrap Angular app
+    });
+});
+</script>
+```
+
+The `_keycloak`variable can be accessed by other modules by injecting a service:
+
+```
+angular
+    .module('auth', ['ui.router'])
+    .service('authService', ['$window',
+    function($window) {
+
+    return $window._keycloak;
+}]);
+```

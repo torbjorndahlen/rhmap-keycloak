@@ -1,0 +1,84 @@
+{
+  "name": "ng-feedhenry",
+  "version": "0.3.0",
+  "main": "./dist/ngFH.js",
+  "description": "AngularJS friendly FeedHenry SDK wrapper.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feedhenry-staff/ngFeedHenry.git"
+  },
+  "scripts": {
+    "clean": "rm -r dist test/bundle.js",
+    "build": "npm run lint && browserify -e ./src/ngFH.js -o ./dist/ngFH.js",
+    "debugbuild": "browserify -e ./src/ngFH.js -o ./test/bundle.js",
+    "prepublish": "npm run build && npm run compress",
+    "compress": "uglifyjs dist/ngFH.js -m -c -o ./dist/ngFH.min.js",
+    "lint": "eslint .",
+    "test": "npm run debugbuild && karma start"
+  },
+  "files": [
+    "dist"
+  ],
+  "authors": [
+    "Evan Shortiss"
+  ],
+  "contributors": [
+    {
+      "name": "Guy Bianco IV",
+      "email": "gjbiancoiv@gmail.com",
+      "url": "gbianco.com"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "angular": "~1.5.8",
+    "angular-mocks": "~1.5.8",
+    "brfs": "~1.2.0",
+    "browserify": "~4.1.8",
+    "eslint": "~3.9.1",
+    "fhlog": "~0.1.6",
+    "fh-mocks": "0.1.1",
+    "karma": "~1.2.0",
+    "karma-chai": "~0.1.0",
+    "karma-chrome-launcher": "~2.0.0",
+    "karma-mocha": "~1.0.1",
+    "karma-mocha-reporter": "~2.0.4",
+    "route-matcher": "0.1.0",
+    "uglify-js": "~2.7.4",
+    "xtend": "^4.0.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "gitHead": "ba1f60dfb0dadb9dc62f5497b5429474c997f5d4",
+  "bugs": {
+    "url": "https://github.com/feedhenry-staff/ngFeedHenry/issues"
+  },
+  "homepage": "https://github.com/feedhenry-staff/ngFeedHenry#readme",
+  "_id": "ng-feedhenry@0.3.0",
+  "_shasum": "03c7d3334ebc8c99964469e9701964b1ce501d52",
+  "_from": "ng-feedhenry@latest",
+  "_npmVersion": "3.10.5",
+  "_nodeVersion": "4.4.3",
+  "_npmUser": {
+    "name": "evanshortiss",
+    "email": "evanshortiss@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "evanshortiss",
+      "email": "evanshortiss@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "03c7d3334ebc8c99964469e9701964b1ce501d52",
+    "tarball": "https://registry.npmjs.org/ng-feedhenry/-/ng-feedhenry-0.3.0.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/ng-feedhenry-0.3.0.tgz_1478798969928_0.8011938817799091"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ng-feedhenry/-/ng-feedhenry-0.3.0.tgz"
+}

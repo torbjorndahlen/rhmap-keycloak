@@ -72,7 +72,7 @@ app.use('/mbaas', mbaasExpress.mbaas);
 
 
 // serve the files out of ./public as our main files
-//app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 // Create a json body parser for POST requests
 var jsonParser = bodyParser.json({limit: '50mb'});

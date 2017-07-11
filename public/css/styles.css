@@ -1,0 +1,103 @@
+/*
+* For debugging
+*/
+.mdb-element-r {
+  border-style:none;
+  border-color: #ff0000;
+  border-width: 1px;
+}
+
+.mdb-element-g {
+  border-style:none;
+  border-color: #00ff00;
+  border-width: 1px;
+}
+
+.mdb-element-b {
+  border-style:none;
+  border-color: #0000ff;
+  border-width: 1px;
+}
+
+.mdb-element-y {
+  border-style:none;
+  border-color: #ffff00;
+  border-width: 1px;
+}
+
+.mdb-element-t {
+  border-style:none;
+  border-color: #00ffff;
+  border-width: 1px;
+}
+
+.mdb-element-m {
+  border-style:none;
+  border-color: #ff00ff;
+  border-width: 1px;
+}
+
+.mdb-element-dg {
+  border-style:none;
+  border-color: #003300;
+  border-width: 1px;
+}
+
+.mdb-element-dp {
+  border-style:none;
+  border-color: #000099;
+  border-width: 1px;
+}
+
+
+md-icon.ng-scope {
+  color: #c62828;
+}
+
+.mdb-card {
+    max-width: 300px;
+}
+
+.mdb-whiteframe {
+  max-width: 300px;
+  max-height: 200px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.mdb-whiteframe-container {
+    max-height: 250px;
+}
+
+
+canvas {
+  margin-left: 10px;
+  margin-right: auto;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+@media (max-width: 600px) {
+  canvas {
+    max-width: 40px;
+    max-height: 40px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+/* Logo at toolbar */
+.mdb-img-left {
+  max-height:64px;
+  max-width: 30%;
+  margin-left:inherit;
+}
+
+
+@media (max-width: 600px) {
+  .mdb-img-left {
+    max-height:64px;
+    max-width: 100%;
+    margin-left:inherit;
+  }
+}

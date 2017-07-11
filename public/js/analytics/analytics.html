@@ -1,0 +1,91 @@
+
+<md-whiteframe flex class="md-whiteframe-24dp mdb-element-m mdb-whiteframe" layout="row"
+  layout-align="center center" layout-align-xs="start center">
+
+  <canvas id="myCanvas0" flex="none" class="mdb-element-m"></canvas>
+
+  <div hide-xs flex layout="column" layout-align="center center" class="mdb-element-m">
+    <h3>{{ items[0].name }}</h3>
+    <h4> {{ items[0].what }}</h4>
+    <p>{{ items[0].notes }}</p>
+  </div>
+
+  <div hide-sm hide-md hide-lg hide-xl flex class="mdb-element-m">
+    <md-menu class="mdb-element-m" layout-align="start center" layout="row">
+          <md-button flex aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
+            <md-icon md-menu-origin md-svg-icon="img/ic_menu_18px.svg"></md-icon>
+          </md-button>
+          <md-menu-content width="4" ng-mouseleave="$mdMenu.close()" layout-align="center center" layout="column">
+            <md-menu-item>
+                {{ items[0].name }}
+            </md-menu-item>
+            <md-menu-item>
+                {{ items[0].what }}
+            </md-menu-item>
+            <md-menu-item>
+                {{ items[0].notes }}
+            </md-menu-item>
+        </md-menu>
+  </div>
+
+</md-whiteframe>
+
+<md-whiteframe flex class="md-whiteframe-24dp mdb-element-m mdb-whiteframe" layout="row" layout-align="center center">
+
+  <canvas id="myCanvas1" flex="none" class="mdb-element-m"></canvas>
+
+  <div hide-xs flex layout="column" layout-align="center center" class="mdb-element-m">
+    <h3>{{ items[1].name }}</h3>
+    <h4>{{ items[1].what }}</h4>
+    <p>{{ items[1].notes }}</p>
+  </div>
+
+  <div hide-sm hide-md hide-lg hide-xl flex class="mdb-element-m">
+    <md-menu class="mdb-element-m" layout-align="start center" layout="row">
+          <md-button flex aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
+            <md-icon md-menu-origin md-svg-icon="img/ic_menu_18px.svg"></md-icon>
+          </md-button>
+          <md-menu-content width="4" ng-mouseleave="$mdMenu.close()" layout-align="center center" layout="column">
+            <md-menu-item>
+                {{ items[1].name }}
+            </md-menu-item>
+            <md-menu-item>
+                {{ items[1].what }}
+            </md-menu-item>
+            <md-menu-item>
+                {{ items[1].notes }}
+            </md-menu-item>
+        </md-menu>
+  </div>
+
+</md-whiteframe>
+
+<md-whiteframe flex class="md-whiteframe-24dp mdb-element-m mdb-whiteframe" layout="row" layout-align="center center">
+
+  <canvas id="myCanvas2" flex="none" class="mdb-element-m"></canvas>
+
+  <div hide-xs flex layout="column" layout-align="center center" class="mdb-element-m">
+    <h3>{{ items[2].name }}</h3>
+    <h4>{{ items[2].what }}</h4>
+    <p>{{ items[2].notes }}</p>
+  </div>
+
+  <div hide-sm hide-md hide-lg hide-xl flex class="mdb-element-m">
+    <md-menu class="mdb-element-m" layout-align="start center" layout="row">
+          <md-button flex aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
+            <md-icon md-menu-origin md-svg-icon="img/ic_menu_18px.svg"></md-icon>
+          </md-button>
+          <md-menu-content width="4" ng-mouseleave="$mdMenu.close()" layout-align="center center" layout="column">
+            <md-menu-item>
+                {{ items[2].name }}
+            </md-menu-item>
+            <md-menu-item>
+                {{ items[2].what }}
+            </md-menu-item>
+            <md-menu-item>
+                {{ items[2].notes }}
+            </md-menu-item>
+        </md-menu>
+  </div>
+
+</md-whiteframe>

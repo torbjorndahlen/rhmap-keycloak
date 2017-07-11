@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html> <!--ng-app="rhmap-keycloak">-->
+    <head>
+
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="A boilerplate for using Keycloak with RHMAP">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+      <title>rhmap-keycloak</title>
+
+      <!-- Add to homescreen for Chrome on Android -->
+      <meta name="mobile-web-app-capable" content="yes">
+      <link rel="icon" sizes="192x192" href="img/android-desktop.png">
+
+      <!-- Add to homescreen for Safari on iOS -->
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <meta name="apple-mobile-web-app-title" content="Material Design">
+      <link rel="apple-touch-icon-precomposed" href="img/ios-desktop.png">
+
+      <link rel="shortcut icon" href="img/favicon.png">
+
+      <link rel="stylesheet" href="lib/angular-material/angular-material.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+        <link rel="stylesheet" href="css/styles.css">
+
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular-animate/angular-animate.min.js"></script>
+        <script src="lib/angular-aria/angular-aria.min.js"></script>
+        <script src="lib/angular-messages/angular-messages.min.js"></script>
+        <script src="lib/angular-material/angular-material.min.js"></script>
+        <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+        <script src="lib/ngstorage/ngStorage.js"></script>
+        <script src="lib/fh-js-sdk/dist/feedhenry.js"></script>
+        <script src="lib/ng-feedhenry/dist/ngFH.min.js"></script>
+        <script src="lib/rh-sso-7.1.1-js-adapter/keycloak.js"></script>
+
+        <!-- Uncomment when building a Cordova app -->
+        <!-- This library will be added automatically by Cordova -->
+        <!--
+        <script src="cordova.js"></script>
+        -->
+        <!-- Uncomment when building a Cordova app -->
+        <!--
+        <script src="js/index.js"></script>
+        -->
+
+    </head>
+    <body>
+
+      <!-- Bootstrap Keycloak and authenticate, then bootstrap Angular app -->
+      <script>
+      angular.element(document).ready(() => {
+        window._keycloak = Keycloak();
+
+        window._keycloak
+          .init({
+            onLoad: 'login-required'
+          })
+          .success(() => {
+            angular.bootstrap(document, ['rhmap-keycloak']); // manually bootstrap Angular app
+          });
+      });
+      </script>
+
+      <div class="app">
+          <div id="deviceready" class="blink">
+            <!--
+              <p class="event listening">Connecting to Device</p>
+              <p class="event received">Device is Ready</p>
+            -->
+              <div ui-view></div>
+          </div>
+      </div>
+
+
+
+        <script src="app.js"></script>
+        <script src="js/util/piechart.js"></script>
+        <!-- Services -->
+        <script src="js/sidenav/sidenav.service.js"></script>
+        <script src="js/list/list.service.js"></script>
+        <script src="js/card/card.service.js"></script>
+        <script src="js/analytics/analytics.service.js"></script>
+        <script src="js/toolbar/toolbar.service.js"></script>
+        <script src="js/form/form.service.js"></script>
+        <script src="js/view/view.service.js"></script>
+        <script src="js/push/push.service.js"></script>
+        <script src="js/sync/sync.service.js"></script>
+        <script src="js/auth/auth.service.js"></script>
+        <!-- Controllers -->
+        <script src="js/sidenav/sidenav.controller.js"></script>
+        <script src="js/list/list.controller.js"></script>
+        <script src="js/card/card.controller.js"></script>
+        <script src="js/analytics/analytics.controller.js"></script>
+        <script src="js/toolbar/toolbar.controller.js"></script>
+        <script src="js/form/form.controller.js"></script>
+        <script src="js/view/view.controller.js"></script>
+        <script src="js/push/push.controller.js"></script>
+        <script src="js/sync/sync.controller.js"></script>
+        <script src="js/auth/auth.controller.js"></script>
+
+    </body>
+</html>

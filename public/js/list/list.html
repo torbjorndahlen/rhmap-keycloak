@@ -1,0 +1,11 @@
+<md-list flex class="mdb-element-y">
+        <md-subheader class="md-no-sticky mdb-element-y">3 line item (with hover)</md-subheader>
+        <md-list-item class="md-3-line mdb-element-y" ng-repeat="item in items" ng-click="doPrimaryAction($event, item)">
+          <img ng-src="{{item.icon}}" class="md-avatar mdb-element-y" alt="{{item.name}}" />
+          <div class="md-list-item-text mdb-element-y" layout="column">
+            <h3 class="mdb-element-y">{{ item.name }}</h3>
+            <h4 class="mdb-element-y">{{ item.what }}</h4>
+            <p class="mdb-element-y">{{ item.notes }}</p>
+          </div>
+        </md-list-item>
+</md-list>
