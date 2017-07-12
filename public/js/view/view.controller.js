@@ -3,8 +3,8 @@
 
   angular
   .module('view')
-  .controller('viewController', ['$mdToast', '$mdBottomSheet', '$mdSidenav', '$timeout', '$mdDialog','$rootScope', '$scope', '$state', '$sessionStorage', 'viewService',
-  function ($mdToast, $mdBottomSheet, $mdSidenav, $timeout, $mdDialog, $rootScope, $scope, $state, $sessionStorage, viewService){
+  .controller('viewController', ['$mdToast', '$mdBottomSheet', '$mdSidenav', '$timeout', '$mdDialog','$rootScope', '$scope', '$state', '$sessionStorage', 'viewService','authService',
+  function ($mdToast, $mdBottomSheet, $mdSidenav, $timeout, $mdDialog, $rootScope, $scope, $state, $sessionStorage, viewService, authService){
 
     console.log("Module view loaded");
 
@@ -20,6 +20,18 @@
     $scope.showPush = false;
     $scope.showSync = false;
     $scope.showAuth = false;
+
+    // Call a protected CloudApp service
+        viewService.callProtected().then(
+            function successCallback(response) {
+
+              alert('response from protected resource: ' + JSON.stringify(response));
+
+          },
+        function errorCallback(response) {
+            alert('ERROR: response from protected resource: ' + response.status + " " + response.statusText);
+        });
+
 
     $scope.toolbarButton = function(event) {
 

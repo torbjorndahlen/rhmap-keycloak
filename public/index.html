@@ -74,7 +74,8 @@
 
         window._keycloak
           .init({
-            onLoad: 'login-required'
+            onLoad: 'login-required',
+            flow: 'implicit'
           })
           .success(() => {
             angular.bootstrap(document, ['rhmap-keycloak']); // manually bootstrap Angular app

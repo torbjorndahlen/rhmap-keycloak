@@ -65,11 +65,10 @@ app.use(keycloak.middleware());
 // RHMAP compatibility
 // Enable CORS for all requests
 app.use(cors());
+
 // Note: the order which we add middleware to Express here is important!
 app.use('/sys', mbaasExpress.sys(securableEndpoints));
 app.use('/mbaas', mbaasExpress.mbaas);
-
-
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
@@ -77,19 +76,6 @@ app.use(express.static(__dirname + '/public'));
 // Create a json body parser for POST requests
 var jsonParser = bodyParser.json({limit: '50mb'});
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}));
-
-// Create a cookie parser
-//app.use(cookieParser());
-
-
-app.use(function(req, res, next) {
-
-  res.header('Access-Control-Allow-Origin', "*");
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-
-});
 
 
 // RHMAP compatibility
@@ -104,6 +90,8 @@ var host = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 app.listen(port, host, function() {
   console.log("App started at: " + new Date().toLocaleString() + " on " + host + ":" + port);
 });
+
+
 
 
 //

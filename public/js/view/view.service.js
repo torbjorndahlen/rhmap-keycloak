@@ -3,17 +3,17 @@
 
 angular
     .module('view', ['ui.router', 'ngStorage', 'ngFeedHenry', 'ngMaterial'])
-    .service('viewService', ['$http', 'FHCloud',
-    function($http, FHCloud) {
+    .service('viewService', ['$http', 'FHCloud', 'authService',
+    function($http, FHCloud, authService) {
 
     var service = {};
 
-    service.startProcess = function (loginName) {
-      var dto = {
-        "username": loginName
-      };
+    // Will require authentication
+    service.callProtected = function () {
 
-      return FHCloud.post('api/process', dto);
+        return $http.get('/api/protected',
+        {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
+        //return FHCloud.get('api/protected');
     };
 
 
