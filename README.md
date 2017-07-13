@@ -123,7 +123,10 @@ FHCloud.get('/api/protected', {headers:{'Accept': 'application/json', 'Authoriza
 ## Running the demo
 Start the CloudApp locally with `grunt serve:local` or just `grunt`.
 Open a browser at the location of your CloudApp, e.g. http://localhost:8000
-If you haven't authenticated to RHSSO a login prompt served from RHSSO will be shown
+If you haven't authenticated to RHSSO a login prompt served from RHSSO will be shown:
+
+![alt text](./img/login.png "Response")
+
 After logging in with the user you created in RHSSO you will be able to access the AngularJS App
 The app will immediately try to access the protected CloudApp resource `/api/protected` using the Access Token provided by the Javascript Keycloak adapter. If everything works you should see an Alert box containing "Response from protected resource, data:"OK", status: 200 and the Access Token.
 
