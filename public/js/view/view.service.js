@@ -2,18 +2,22 @@
 'use strict';
 
 angular
-    .module('view', ['ui.router', 'ngStorage', 'ngFeedHenry', 'ngMaterial'])
-    .service('viewService', ['$http', 'FHCloud', 'authService',
-    function($http, FHCloud, authService) {
+    .module('view', ['ui.router', 'ngStorage', 'ngFeedHenry', 'ngMaterial','config'])
+    .service('viewService', ['$http', 'FHCloud', 'authService', 'ENV',
+    function($http, FHCloud, authService, ENV) {
 
     var service = {};
 
     // Will require authentication
     service.callProtected = function () {
 
-        return $http.get('/api/protected',
-        {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
-        //return FHCloud.get('api/protected');
+        if(ENV.name === 'local') {
+          return $http.get('/api/protected',
+          {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
+        } else {
+          return FHCloud.get('/api/protected', {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
+        }
+
     };
 
 

@@ -26,6 +26,7 @@
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-env": "^0.4.4",
+    "grunt-ng-constant": "^2.0.1",
     "grunt-nodemon": "^0.4.2"
   },
   "dependencies": {

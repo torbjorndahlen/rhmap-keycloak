@@ -11,7 +11,8 @@ var cmsapp = angular.module('rhmap-keycloak', [
   'view',
   'push',
   'sync',
-  'auth'
+  'auth',
+  'config'
 ]);
 
 cmsapp.config(function($mdThemingProvider) {

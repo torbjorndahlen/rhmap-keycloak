@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 
     watch: {
       files: ['<%= jshint.files %>'],
-      tasks: ['jshint']
+      tasks: ['jshint','nodemon','watch']
     },
 
     env: {
@@ -34,10 +34,42 @@ module.exports = function(grunt) {
            * or a remote instance.
            */
           var serviceMap = {
-            'MBaaS_SERVICE_GUID_1': 'http://127.0.0.1:8010',
+            'MBaaS_SERVICE_GUID_1': 'http://127.0.0.1:8000',
             'MBaaS_SERVICE_GUID_2': 'https://host-and-path-to-service'
           };
           return JSON.stringify(serviceMap);
+        }
+      }
+    },
+
+    ngconstant: {
+      // Options for all targets
+      options: {
+        space: '  ',
+        wrap: '(function(){\n\n"use strict";\n\n {\%= __ngModule %}\n\n})();',
+        name: 'config',
+      },
+      // Environment targets
+      local: {
+        options: {
+          dest: 'public/js/util/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'local',
+            apiEndpoint: 'http://localhost:8000'
+          }
+        }
+      },
+      remote: {
+        options: {
+          dest: 'public/js/util/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'remote',
+            apiEndpoint: ''
+          }
         }
       }
     },
@@ -54,7 +86,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-ng-constant');
 
-  grunt.registerTask('default', ['jshint','nodemon','watch']);
+  grunt.registerTask('serve', function (target) {
+    if (target === 'local') {
+      return grunt.task.run(['ngconstant:local', 'jshint', 'nodemon', 'watch']);
+    }
+
+    return grunt.task.run(['ngconstant:remote', 'jshint', 'nodemon', 'watch']);
+  });
+
+  grunt.registerTask('default', ['serve:local', 'jshint','nodemon','watch']);
 
 };
