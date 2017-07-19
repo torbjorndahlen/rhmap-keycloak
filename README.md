@@ -133,10 +133,45 @@ The app will immediately try to access the protected CloudApp resource `/api/pro
 ![alt text](./img/protected-response.png "Response")
 
 ## Deploying to RHMAP
+### Deploying a routable RHSSO instance
 Note that the RHSSO server must be accessible from the internet in order for the CloudApp
-running on RHMAP to be able to access it.
-The `auth-server-url`in keycloak.json for both the CloudApp and the AngularJS app needs to be
-changed to the server and port where RHSSO is running.
+running on RHMAP to be able to access it. Also since RHSSO is intended to be accessible on the 127.0.0.1 address only, it is recommended to install a reverse proxy on the same host to provide an external URI to RHSSO, for example HAProxy which is installed on RHEL with `yum install haproxy`.
+HAProxy is then configured to forward requests to RHSSO as follows:
+
+```
+/etc/haproxy/haproxy.cfg:
+
+frontend http_web *:80
+  mode http
+  default_backend rgw
+
+backend rgw
+  balance roundrobin
+  mode http
+  stats enable
+  stats hide-version
+  stats uri /stats
+  stats realm Haproxy\ Statistics
+  stats auth haproxy:redhat
+  server  keycloak 127.0.0.1:8080 check
+```
+
+The global and default sections can be left with default settings.
+For a full description on how to configure HAProxy refer to (https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Load_Balancer_Administration/install_haproxy_example1.html).
+You can access HAProxy statistics on the server (e.g. http://rhsso-host/stats) using haproxy/redhat as username/password. You should now be able to access RHSSO on http://rhsso-host:80 and log in to the Admin app.
+
+To support running behind a reverse proxy, RHSSO must be configured to read the client's IP address from the X-Forwarded-For header. This is done by adding the attribute `proxy-address-forwarding="true"` to the standalone.xml configuration file. Also haproxy.cfg must contain `option forwardfor` in order to properly set the client's IP in the X-Forwarded-For header.
+
+Note that trying to login to RHSSO from Chrome causes an infinite loop. Safari works fine.
+
+```
+<subsystem xmlns="urn:jboss:domain:undertow:3.1">
+            <buffer-cache name="default"/>
+            <server name="default-server">
+                <http-listener name="default" socket-binding="http" redirect-socket="https proxy-address-forwarding="true"/>
+```
+
+### Deploying the CloudApp
 
 To deploy the CloudApp on RHMAP do the following steps:
 ```
@@ -150,8 +185,10 @@ To deploy the CloudApp on RHMAP do the following steps:
 8. Create a connection tag which requires a Client App. Simply go to Projects and create a Hello World App in the project.
 9. Go to Connections and create a new Connection
 10. Select Configure and copy everything in the JSON object into the file `fhconfig` which is located under `rhmap-keycloak/public`.
-11. Deploy the Cloud App
-12. Use the link to the Cloud App to access the mobile app
+11. The `auth-server-url`in keycloak.json for both the CloudApp and the AngularJS app needs to be
+changed to the server and port where HAProxy is running.
+12. Deploy the Cloud App
+13. Use the link to the Cloud App to access the mobile app
 ```
 
 ## Troubleshooting
