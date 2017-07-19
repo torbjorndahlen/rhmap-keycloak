@@ -4,7 +4,7 @@
 
  angular.module('config', [])
 
-.constant('ENV', {name:'local',apiEndpoint:'http://localhost:8000'})
+.constant('ENV', {name:'remote',apiEndpoint:''})
 
 ;
 

@@ -178,18 +178,6 @@ defaults
     option forwardfor       except 127.0.0.0/8
 ```
 
-Note that trying to login to RHSSO from Chrome (v.59.0.3071.115) causes an infinite loop. This is since Chrome adds an `Authorization Basic` header to the request. Safari works fine however.
-
-Request received by HAProxy when using Chrome:
-```
-localhost haproxy[14515]: 83.233.154.15:49283 [19/Jul/2017:00:48:16.362] http_web rgw/keycloak 1/0/0/272/+273 200 +333 - - ---- 4/4/1/0/0 0/0 {Basic aGFwcm94eTpyZWRoYXQ=} "GET /auth/ HTTP/1.1"
-```
-
-Request received by HAProxy when using Safari:
-```
-localhost haproxy[14515]: 83.233.154.15:49658 [19/Jul/2017:00:49:53.359] http_web rgw/keycloak 943/0/0/7/+950 200 +215 - - ---- 1/1/1/0/0 0/0 {} "GET / HTTP/1.1"
-```
-
 When RHSSO and HAProxy is up and running, the next step is to deploy the CloudApp on RHMAP.
 
 ### Deploying the CloudApp
@@ -213,6 +201,20 @@ changed to the server and port where HAProxy is running.
 ```
 
 ## Troubleshooting
+
+### Chrome adding Authorization Basic header
+Note that trying to login to RHSSO from Chrome (v.59.0.3071.115) causes an infinite loop when RHSSO is deployed on a routable server behind HAProxy. This is since Chrome adds an `Authorization Basic` header to the request.
+
+Request received by HAProxy when using Chrome:
+```
+localhost haproxy[14515]: 83.233.154.15:49283 [19/Jul/2017:00:48:16.362] http_web rgw/keycloak 1/0/0/272/+273 200 +333 - - ---- 4/4/1/0/0 0/0 {Basic aGFwcm94eTpyZWRoYXQ=} "GET /auth/ HTTP/1.1"
+```
+
+This can be solved by using for example Safari.
+Request received by HAProxy when using Safari:
+```
+localhost haproxy[14515]: 83.233.154.15:49658 [19/Jul/2017:00:49:53.359] http_web rgw/keycloak 943/0/0/7/+950 200 +215 - - ---- 1/1/1/0/0 0/0 {} "GET / HTTP/1.1"
+```
 
 ### No "Access-Control-Allow-Origin"
 If you're seeing No "Access-Control-Allow-Origin" in the browsers web console when the AngularJS app
