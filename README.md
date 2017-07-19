@@ -133,9 +133,10 @@ The app will immediately try to access the protected CloudApp resource `/api/pro
 ![alt text](./img/protected-response.png "Response")
 
 ## Deploying to RHMAP
+When deploying the demo on RHMAP it's necessary to also redeploy RHSSO on a routable server in order for the CloudApp to be able to validate the Access Token.
+
 ### Deploying a routable RHSSO instance
-Note that the RHSSO server must be accessible from the internet in order for the CloudApp
-running on RHMAP to be able to access it. Also since RHSSO is intended to be accessible on the 127.0.0.1 address only, it is recommended to install a reverse proxy on the same host to provide an external URI to RHSSO, for example HAProxy which is installed on RHEL with `yum install haproxy`.
+In order for the CloudApp running on RHMAP to be able to access RHSSO it needs to be deployed on a server with a routable IP address. Also since RHSSO is intended to be accessible on the 127.0.0.1 address only, it is recommended to install a reverse proxy on the same host to provide an external URI to RHSSO, for example HAProxy which is installed on RHEL with `yum install haproxy`.
 HAProxy is then configured to forward requests to RHSSO as follows:
 
 ```
@@ -160,9 +161,7 @@ The global and default sections can be left with default settings.
 For a full description on how to configure HAProxy refer to (https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Load_Balancer_Administration/install_haproxy_example1.html).
 You can access HAProxy statistics on the server (e.g. http://rhsso-host/stats) using haproxy/redhat as username/password. You should now be able to access RHSSO on http://rhsso-host:80 and log in to the Admin app.
 
-To support running behind a reverse proxy, RHSSO must be configured to read the client's IP address from the X-Forwarded-For header. This is done by adding the attribute `proxy-address-forwarding="true"` to the standalone.xml configuration file. Also haproxy.cfg must contain `option forwardfor` in order to properly set the client's IP in the X-Forwarded-For header.
-
-Note that trying to login to RHSSO from Chrome causes an infinite loop. Safari works fine.
+To support running behind a reverse proxy, RHSSO must be configured to read the client's IP address from the X-Forwarded-For header. This is done by adding the attribute `proxy-address-forwarding="true"` to the standalone.xml configuration file.
 
 ```
 <subsystem xmlns="urn:jboss:domain:undertow:3.1">
@@ -170,6 +169,28 @@ Note that trying to login to RHSSO from Chrome causes an infinite loop. Safari w
             <server name="default-server">
                 <http-listener name="default" socket-binding="http" redirect-socket="https proxy-address-forwarding="true"/>
 ```
+
+Also haproxy.cfg must contain `option forwardfor` in order to properly set the client's IP in the X-Forwarded-For header.
+
+```
+defaults
+
+    option forwardfor       except 127.0.0.0/8
+```
+
+Note that trying to login to RHSSO from Chrome (v.59.0.3071.115) causes an infinite loop. This is since Chrome adds an `Authorization Basic` header to the request. Safari works fine however.
+
+Request received by HAProxy when using Chrome:
+```
+localhost haproxy[14515]: 83.233.154.15:49283 [19/Jul/2017:00:48:16.362] http_web rgw/keycloak 1/0/0/272/+273 200 +333 - - ---- 4/4/1/0/0 0/0 {Basic aGFwcm94eTpyZWRoYXQ=} "GET /auth/ HTTP/1.1"
+```
+
+Request received by HAProxy when using Safari:
+```
+localhost haproxy[14515]: 83.233.154.15:49658 [19/Jul/2017:00:49:53.359] http_web rgw/keycloak 943/0/0/7/+950 200 +215 - - ---- 1/1/1/0/0 0/0 {} "GET / HTTP/1.1"
+```
+
+When RHSSO and HAProxy is up and running, the next step is to deploy the CloudApp on RHMAP.
 
 ### Deploying the CloudApp
 
