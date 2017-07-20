@@ -15,8 +15,6 @@ angular
           return $http.get('/api/protected',
           {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
         } else {
-          // Doesn't work! Use $fh.cloud to pass headers required by keycloak
-          //return FHCloud.get('/api/protected', {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
 
           var deferred = $q.defer();
 
@@ -31,7 +29,7 @@ angular
           }, function(res) {
             deferred.resolve(res);
           }, function(msg,err) {
-            console.log("viewService: Error " + err + "when calling protected resource: " + msg);
+            console.log("viewService: Error " + JSON.stringify(err) + "when calling protected resource: " + msg);
             deferred.reject({status: err, statusText: msg});
           });
 
