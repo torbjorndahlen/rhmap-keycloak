@@ -24,7 +24,7 @@ angular
             "path": "/api/protected",
             "method": "GET",
             "contentType": "application/json",
-            "headers": {{"Authorization": 'bearer ' + authService.token}},
+            "headers": {"Authorization": 'bearer ' + authService.token},
             "timeout": 25000 // timeout value specified in milliseconds. Default: 60000 (60s)
           }, function(res) {
             deferred.resolve(res);
