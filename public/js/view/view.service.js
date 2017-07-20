@@ -24,13 +24,13 @@ angular
             "path": "/api/protected",
             "method": "GET",
             "contentType": "application/json",
-            "headers": [{'Accept': 'application/json'}, {"Authorization": 'bearer ' + authService.token}],
+            "headers": {{"Authorization": 'bearer ' + authService.token}},
             "timeout": 25000 // timeout value specified in milliseconds. Default: 60000 (60s)
           }, function(res) {
             deferred.resolve(res);
           }, function(msg,err) {
-            console.log("viewService: Error " + JSON.stringify(err) + "when calling protected resource: " + msg);
-            deferred.reject({status: err, statusText: msg});
+            console.log("viewService: Error " + err.status + "when calling protected resource: " + msg);
+            deferred.reject({status: err.status, statusText: msg});
           });
 
           return deferred.promise;
