@@ -20,6 +20,8 @@ angular
 
           var deferred = $q.defer();
 
+          deferred.notify('Calling protected resource...');
+
           $fh.cloud({
             "path": "/api/protected",
             "method": "GET",
@@ -27,16 +29,13 @@ angular
             "Authorization": 'bearer ' + authService.token,
             "timeout": 25000 // timeout value specified in milliseconds. Default: 60000 (60s)
           }, function(res) {
-
             deferred.resolve(res);
-            return deferred.promise;
-
           }, function(msg,err) {
-            deferred.resolve(err);
-            return deferred.promise;
+            console.log("viewService: Error " + err + "when calling protected resource: " + msg);
+            deferred.reject({status: err, statusText: msg});
           });
 
-
+          return deferred.promise;
         } // end else
 
     };
