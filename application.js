@@ -39,7 +39,7 @@ var Keycloak = require('keycloak-connect');
 var memoryStore = new session.MemoryStore();
 
 app.use(session({
-  secret: 'mySecret',
+  secret: 'afea301e-b382-4ad2-80f2-11cc6b9cd957',
   resave: false,
   saveUninitialized: true,
   store: memoryStore
@@ -116,13 +116,13 @@ app.get('/api/protected', keycloak.protect(), function (req, res) {
 
 		console.log('\n\n===========REQUEST===============');
 		console.log('\n\nGET /api/protected');
+    console.log('\n\nAuthorization: ' + req.get('Authorization'));
 
     res.statusCode = 200;
     res.json('OK');
 
     console.log('\n\n=========REQUEST END===============');
 });
-
 
 
 module.exports = app;

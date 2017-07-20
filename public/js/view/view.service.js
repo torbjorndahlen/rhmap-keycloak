@@ -3,8 +3,8 @@
 
 angular
     .module('view', ['ui.router', 'ngStorage', 'ngFeedHenry', 'ngMaterial','config'])
-    .service('viewService', ['$http', 'FHCloud', 'authService', 'ENV',
-    function($http, FHCloud, authService, ENV) {
+    .service('viewService', ['$http', '$q', 'authService', 'ENV',
+    function($http, $q, authService, ENV) {
 
     var service = {};
 
@@ -15,11 +15,31 @@ angular
           return $http.get('/api/protected',
           {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
         } else {
-          return FHCloud.get('/api/protected', {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
-        }
+          // Doesn't work! Use $fh.cloud to pass headers required by keycloak
+          //return FHCloud.get('/api/protected', {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
+
+          var deferred = $q.defer();
+
+          $fh.cloud({
+            "path": "/api/protected",
+            "method": "GET",
+            "contentType": "application/json",
+            "Authorization": 'bearer ' + authService.token,
+            "timeout": 25000 // timeout value specified in milliseconds. Default: 60000 (60s)
+          }, function(res) {
+
+            deferred.resolve(res);
+            return deferred.promise;
+
+          }, function(msg,err) {
+            deferred.resolve(err);
+            return deferred.promise;
+          });
+
+
+        } // end else
 
     };
-
 
     return service;
 }]);
