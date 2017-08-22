@@ -115,9 +115,19 @@ $http.get('/api/protected',
 {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
 ```
 
-When the CloudApp runs on RHMAP:
+When the CloudApp runs on RHMAP, the $fh.cloud API is used. Note also the use of `defer`in order to return a promise to the controller in the same way as `$http` does.
 ```
-FHCloud.get('/api/protected', {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
+$fh.cloud({
+  "path": "/api/protected",
+  "method": "GET",
+  "contentType": "application/json",
+  "headers": {"Authorization": 'bearer ' + authService.token},
+  "timeout": 25000
+}, function(res) {
+  deferred.resolve(res);
+}, function(msg,err) {
+  deferred.reject({status: err.status, statusText: msg});
+});
 ```
 
 ## Running the demo
@@ -167,7 +177,7 @@ To support running behind a reverse proxy, RHSSO must be configured to read the 
 <subsystem xmlns="urn:jboss:domain:undertow:3.1">
             <buffer-cache name="default"/>
             <server name="default-server">
-                <http-listener name="default" socket-binding="http" redirect-socket="https proxy-address-forwarding="true"/>
+                <http-listener name="default" socket-binding="http" redirect-socket="https" proxy-address-forwarding="true"/>
 ```
 
 Also haproxy.cfg must contain `option forwardfor` in order to properly set the client's IP in the X-Forwarded-For header.
