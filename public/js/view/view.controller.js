@@ -22,6 +22,7 @@
     $scope.showAuth = false;
 
     // Call a protected CloudApp service
+    
         viewService.callProtected().then(
             function successCallback(response) {
 

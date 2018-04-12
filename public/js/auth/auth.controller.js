@@ -8,11 +8,13 @@
 
     console.log("Module auth loaded");
 
+    /*
     authService.loadUserProfile().success(function(profile) {
         alert(JSON.stringify(profile));
     }).error(function() {
         alert('Failed to load user profile');
     });
+    */
 
   }]);
 })();

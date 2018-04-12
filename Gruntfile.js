@@ -78,6 +78,13 @@ module.exports = function(grunt) {
       dev: {
         script: 'application.js'
       }
+    },
+
+    concurrent: {
+      serve: ['nodemon', 'watch'],
+      options: {
+        logConcurrentOutput: true
+      }
     }
 
   });
@@ -87,10 +94,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-ng-constant');
+  grunt.loadNpmTasks('grunt-concurrent');
 
   grunt.registerTask('serve', function (target) {
     if (target === 'local') {
-      return grunt.task.run(['ngconstant:local', 'jshint', 'nodemon', 'watch']);
+      return grunt.task.run(['env:local', 'ngconstant:local', 'jshint', 'concurrent:serve']);
     }
 
     return grunt.task.run(['ngconstant:remote', 'jshint', 'nodemon', 'watch']);

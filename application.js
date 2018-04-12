@@ -39,7 +39,7 @@ var Keycloak = require('keycloak-connect');
 var memoryStore = new session.MemoryStore();
 
 app.use(session({
-  secret: 'afea301e-b382-4ad2-80f2-11cc6b9cd957',
+  secret: 'b06e7a82-e11e-4531-812b-01a0c3ebdf5c',
   resave: false,
   saveUninitialized: true,
   store: memoryStore
@@ -61,6 +61,15 @@ securableEndpoints = ['/api'];
 
 // keycloak
 app.use(keycloak.middleware());
+
+app.use(function(req, res, next) {
+
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+
+});
 
 // RHMAP compatibility
 // Enable CORS for all requests

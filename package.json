@@ -27,7 +27,8 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-env": "^0.4.4",
     "grunt-ng-constant": "^2.0.1",
-    "grunt-nodemon": "^0.4.2"
+    "grunt-nodemon": "^0.4.2",
+    "grunt-concurrent": "latest"
   },
   "dependencies": {
     "body-parser": "^1.17.2",

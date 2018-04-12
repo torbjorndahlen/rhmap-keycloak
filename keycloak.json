@@ -1,7 +1,7 @@
 {
   "realm": "rhmap-keycloak",
   "bearer-only": true,
-  "auth-server-url": "http://ec2-13-59-138-58.us-east-2.compute.amazonaws.com/auth",
-  "ssl-required": "none",
+  "auth-server-url": "http://localhost:8080/auth",
+  "ssl-required": "external",
   "resource": "rhmap-cloudapp"
 }

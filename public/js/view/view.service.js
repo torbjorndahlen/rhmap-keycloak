@@ -13,7 +13,7 @@ angular
 
         if(ENV.name === 'local') {
           return $http.get('/api/protected',
-          {headers:{'Accept': 'application/json', 'Authorization': 'bearer ' + authService.token}});
+          {headers:{"Content-Type": 'application/json', "Authorization": 'bearer ' + authService.token}});
         } else {
 
           var deferred = $q.defer();
